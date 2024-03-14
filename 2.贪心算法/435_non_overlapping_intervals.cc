@@ -4,6 +4,7 @@
 */
 #include <vector>
 #include <algorithm>
+#include <iostream>
 
 using namespace std;
 
@@ -29,4 +30,12 @@ int eraseOverlapIntervals(vector<vector<int>> &intervals)
         }
     }
     return removed;
+}
+
+int main()
+{
+    vector<vector<int>> intervals = {{1, 2}, {2, 4}, {1, 3}};
+    int result = eraseOverlapIntervals(intervals);
+    cout << "最少需要移除" << result << "个区间" << endl;
+    return 0;
 }
