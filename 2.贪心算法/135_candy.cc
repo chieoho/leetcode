@@ -22,7 +22,7 @@ int candy(vector<int> &ratings)
     {
         if (ratings[i] > ratings[i - 1])
         {
-            num[i] = num[i - 1] + 1;
+            num[i] = num[i - 1] + 1; // 这里不用max，因为num[i]是1
         }
     }
     for (int i = size - 1; i > 0; --i)

@@ -20,13 +20,13 @@ int eraseOverlapIntervals(vector<vector<int>> &intervals)
     int removed = 0, prev = intervals[0][1];
     for (int i = 1; i < n; ++i)
     {
-        if (intervals[i][0] < prev)
+        if (intervals[i][0] < prev) // 重叠
         {
-            ++removed;
+            ++removed; // 移除当前区间
         }
         else
         {
-            prev = intervals[i][1];
+            prev = intervals[i][1]; // 更新prev
         }
     }
     return removed;

@@ -20,7 +20,7 @@ int findContentChildren(vector<int> &children, vector<int> &cookies)
     {
         if (children[child] <= cookies[cookie])
             ++child;
-        ++cookie;
+        ++cookie; // 逐个饼干检查是否满足孩子
     }
     return child;
 }
