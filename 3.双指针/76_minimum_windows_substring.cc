@@ -1,62 +1,52 @@
 /*
-给定两个字符串S 和T ，求S 中包含T 所有字符的最短连续子字符串的长度，同时要求时间
+给定两个字符串S和T ，求S中包含T所有字符的最短连续子字符串的长度，同时要求时间
 复杂度不得超过O(n)。(Hard)
 
 Input: S = "ADOBECODEBANC", T = "ABC"
 Output: "BANC"
-
 */
+#include <iostream>
 #include <string>
 #include <vector>
-#include <cstdio>
+#include <climits>
 
 using namespace std;
 
-string minWindow(string S, string T)
+string minWindow(string s, string t)
 {
-    vector<int> chars(128, 0);
-    vector<bool> flag(128, false);
-    // 先统计T中的字符情况
-    for (int i = 0; i < T.size(); ++i)
+    vector<int> map(128, 0);
+    for (auto c : t)
     {
-        flag[T[i]] = true;
-        ++chars[T[i]];
+        map[c]++; // 记录t中每个字符出现的次数
     }
-    // 移动滑动窗口，不断更改统计数据
-    int cnt = 0, l = 0, min_l = 0, min_size = S.size() + 1;
-    for (int r = 0; r < S.size(); ++r)
+    int counter = t.size(), begin = 0, end = 0, d = INT_MAX, head = 0;
+    while (end < s.size())
     {
-        if (flag[S[r]])
+        if (map[s[end++]]-- > 0)
         {
-            if (--chars[S[r]] >= 0)
+            counter--;
+        }
+        while (counter == 0)
+        {
+            if (end - begin < d) // 更新最小子串的位置（要点在这里）
             {
-                ++cnt;
+                d = end - begin;
+                head = begin;
             }
-            // 若目前滑动窗口已包含T中全部字符，
-            // 则尝试将l右移，在不影响结果的情况下获得最短子字符串
-            while (cnt == T.size())
+            if (map[s[begin++]]++ == 0) // 移动begin指针
             {
-                if (r - l + 1 < min_size)
-                {
-                    min_l = l;
-                    min_size = r - l + 1;
-                }
-                if (flag[S[l]] && ++chars[S[l]] > 0)
-                {
-                    --cnt;
-                }
-                ++l;
+                counter++;
             }
         }
     }
-    return min_size > S.size() ? "" : S.substr(min_l, min_size);
+    cout << "end: " << end << endl;
+    return d == INT_MAX ? "" : s.substr(head, d);
 }
 
 int main()
 {
-    string S = "ADOBECODEBANC";
-    string T = "ABC";
-    string result = minWindow(S, T);
-    printf("最短连续子字符串为%s\n", result.c_str());
+    string s = "ADOBECODEBANC";
+    string t = "ABC";
+    cout << minWindow(s, t) << endl;
     return 0;
 }

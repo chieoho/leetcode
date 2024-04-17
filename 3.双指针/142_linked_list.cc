@@ -19,14 +19,14 @@ ListNode *detectCycle(ListNode *head)
     {
         if (!fast || !fast->next)
             return nullptr;
-        fast = fast->next->next;
-        slow = slow->next;
+        fast = fast->next->next; // 快指针一次走两步
+        slow = slow->next;       // 慢指针一次走一步
     } while (fast != slow);
     // 如果存在，查找环路节点
     fast = head;
     while (fast != slow)
     {
-        slow = slow->next;
+        slow = slow->next; // slow和fast都是一次走一步
         fast = fast->next;
     }
     return fast;
