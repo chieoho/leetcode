@@ -28,7 +28,7 @@ string minWindow(string s, string t)
         }
         while (counter == 0)
         {
-            if (end - begin < d) // 更新最小子串的位置（要点在这里）
+            if (end - begin < d) // 更短则更新（要点在这里）
             {
                 d = end - begin;
                 head = begin;

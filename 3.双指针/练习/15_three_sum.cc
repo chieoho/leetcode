@@ -17,9 +17,9 @@ vector<vector<int>> threeSum(vector<int> &nums)
         return result;
     }
     sort(nums.begin(), nums.end());
-    for (int i = 0; i < nums.size() - 2; ++i)
+    for (int i = 0; i < nums.size() - 2; ++i)  // 选取第一个数，后面两个数用双指针
     {
-        if (i > 0 && nums[i] == nums[i - 1])
+        if (i > 0 && nums[i] == nums[i - 1])  // 去重
         {
             continue;
         }
